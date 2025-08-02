@@ -1,0 +1,713 @@
+/* General Body and Font Styles */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #0d0d1a; /* Deeper dark base color for black and purple theme */
+    color: #f0f0f0; /* Slightly brighter text for improved contrast */
+    min-height: 100vh; /* Ensure body takes full viewport height */
+    margin: 0; /* Remove default body margin */
+    display: flex; /* Flex container for sidebar and main content */
+    flex-direction: column; /* Stack vertically on small screens */
+
+    /* --- FONT SMOOTHING FOR CLARITY --- */
+    -webkit-font-smoothing: antialiased; /* For Chrome, Safari, and newer Edge */
+    -moz-osx-font-smoothing: grayscale;  /* For Firefox on macOS */
+    /* font-smoothing: antialiased;  <-- REMOVE THIS LINE */
+    font-smoothing: antialiased;
+}
+
+/* Background Gradients and Patterns */
+body {
+    background-image:
+        radial-gradient(circle at 10% 20%, rgba(128, 0, 128, 0.18) 0%, rgba(128, 0, 128, 0) 70%),
+        radial-gradient(circle at 90% 80%, rgba(128, 0, 128, 0.18) 0%, rgba(128, 0, 128, 0) 70%),
+        linear-gradient(45deg, rgba(80, 0, 80, 0.12) 25%, transparent 25%, transparent 75%, rgba(80, 0, 80, 0.12) 75%, rgba(80, 0, 80, 0.12) 100%),
+        linear-gradient(-45deg, rgba(80, 0, 80, 0.12) 25%, transparent 25%, transparent 75%, rgba(80, 0, 80, 0.12) 75%, rgba(80, 0, 80, 0.12) 100%),
+        linear-gradient(90deg, rgba(150, 0, 150, 0.08) 1px, transparent 1px),
+        linear-gradient(rgba(150, 0, 150, 0.08) 1px, transparent 1px);
+    background-size: 80px 80px, 80px 80px, 80px 80px, 80px 80px, 20px 20px, 20px 20px;
+    background-position: center, center, center, center, center, center;
+    background-repeat: no-repeat, no-repeat, repeat, repeat, repeat, repeat;
+    background-color: #0d0d1a;
+}
+
+/* Page Titles */
+h1 {
+    text-shadow: 0 0 8px rgba(255, 0, 255, 0.5), 0 0 15px rgba(128, 0, 128, 0.3);
+}
+
+/* Progress Circles (Load Percentages) */
+.progress-circle {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: conic-gradient(#c084fc var(--progress), #581c87 var(--progress));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+    font-size: 0.875rem;
+    transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+}
+.progress-circle:hover {
+    transform: scale(1.08);
+    filter: brightness(1.1);
+}
+.progress-circle::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #111122;
+}
+.progress-circle span {
+    position: relative;
+    z-index: 1;
+}
+
+/* Dashboard Cards - General Styling */
+.dashboard-card {
+    background-color: rgba(16, 16, 32, 0.95);
+    border: 1px solid rgba(150, 0, 150, 0.5);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4),
+                0 0 30px rgba(128, 0, 128, 0.3),
+                inset 0 0 8px rgba(128, 0, 128, 0.15);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border-radius: 0.75rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Dashboard Card Hover/Interaction (only when not in customization mode) */
+body:not(.customization-active) .dashboard-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 0 40px rgba(128, 0, 128, 0.4), inset 0 0 10px rgba(128, 0, 128, 0.2);
+}
+
+/* Inner card elements (e.g., for charts) */
+.card {
+    background-color: #0b132b;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+}
+
+/* Form Inputs (Number/Text Fields in Load section and Filters) */
+input[type="number"],
+.filter-input,
+.modal-content input,
+.modal-content select {
+    background-color: #1a1a2e;
+    border: 1px solid #581c87;
+    color: #e0e0e0;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.375rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+input[type="number"] {
+    width: 100px;
+    text-align: center;
+}
+
+input[type="number"]:focus,
+.filter-input:focus,
+.modal-content input:focus,
+.modal-content select:focus {
+    outline: none;
+    border-color: #c084fc;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(192, 132, 252, 0.2);
+}
+.filter-input::placeholder {
+    color: #888;
+}
+
+/* Action Buttons (General) */
+.action-button {
+    background-color: #7e22ce;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+.action-button:hover {
+    background-color: #6b21a8;
+    box-shadow: 0 6px 8px -2px rgba(0, 0, 0, 0.1), 0 3px 5px -1px rgba(0, 0, 0, 0.08);
+}
+.action-button:active {
+    background-color: #581c87;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+/* Specific button color for Cancel in Modal */
+.action-button.bg-gray-600 {
+    background-color: #4a5568;
+}
+.action-button.bg-gray-600:hover {
+    background-color: #2d3748;
+}
+
+/* Status Message Display */
+.status-message {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: #a0aec0;
+}
+
+/* --- Grid Line View Styles --- */
+.grid-container {
+    position: relative;
+    width: 100%;
+    padding-top: 100%; /* 1:1 Aspect Ratio for the SVG grid */
+    max-width: 800px;
+    margin: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(50, 0, 50, 0.6);
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5), 0 0 25px rgba(100, 0, 100, 0.3);
+}
+.grid-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.grid-line {
+    stroke: rgba(180, 180, 180, 0.15);
+    stroke-width: 0.1;
+}
+#grid path {
+    stroke: rgba(180, 180, 180, 0.25);
+    stroke-width: 0.2;
+}
+#smallGrid path {
+    stroke-dasharray: 0.5, 0.5;
+}
+.grid-label {
+    font-size: 2.2px;
+    fill: #c0c0c0;
+    text-anchor: middle;
+    dominant-baseline: central;
+    font-weight: 500;
+}
+
+/* --- FM2000 Rack Layout Styles --- */
+.fm2000-rack-item {
+    background-color: rgba(16, 16, 32, 0.95);
+    border: 1px solid rgba(150, 0, 150, 0.5);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 30px rgba(128, 0, 128, 0.3), inset 0 0 8px rgba(128, 0, 128, 0.15);
+    border-radius: 0.75rem;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    text-align: center;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.fm2000-rack-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 0 40px rgba(128, 0, 128, 0.4), inset 0 0 10px rgba(128, 0, 128, 0.2);
+}
+.fm2000-rack-status-indicator {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-bottom: 0.5rem;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+}
+.fm2000-rack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+}
+@media (min-width: 768px) {
+    .fm2000-rack-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+@media (min-width: 1024px) {
+    .fm2000-rack-grid {
+        grid-template-columns: repeat(8, 1fr);
+    }
+}
+.fm2000-rack-item .source-button {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.75rem;
+    border-radius: 4px;
+    background-color: #4a044a;
+    color: #fff;
+    border: 1px solid #c084fc;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+.fm2000-rack-item .source-button:hover {
+    background-color: #6a046a;
+    border-color: #e879f9;
+}
+.fm2000-rack-item .note-text {
+    background-color: #1a1a2e;
+    border: 1px solid rgba(128, 0, 128, 0.4);
+    padding: 0.5rem;
+    border-radius: 4px;
+    margin-top: 0.75rem;
+    color: #e0e0e0;
+    min-height: 40px;
+    font-size: 0.75rem;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+/* --- Floor Plan SVG Styles --- */
+#svgContainer svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    will-change: transform;
+}
+.svg-element {
+    fill: #4a4a6e;
+    stroke: #8080ff;
+    stroke-width: 1;
+    transition: fill 0.2s ease-in-out, stroke 0.2s ease-in-out, transform 0.1s ease-in-out;
+    cursor: grab;
+    transform-origin: center center;
+}
+.svg-element:hover {
+    fill: #6a6ad0;
+    transform: scale(1.02);
+}
+.svg-element.status-alert {
+    animation: pulse-red 1.5s infinite;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+    fill: #dc2626;
+    stroke: #b91c1c;
+}
+.svg-element.status-warning {
+    animation: pulse-yellow 1.5s infinite;
+    box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+    fill: #ca8a04;
+    stroke: #a16207;
+}
+.svg-element.status-normal {
+    fill: #22c55e;
+    stroke: #16a34a;
+    animation: none;
+    box-shadow: none;
+}
+@keyframes pulse-red {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.03); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+}
+@keyframes pulse-yellow {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.02); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+}
+#floorPlanDetailPanel {
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    max-height: 90%;
+    z-index: 10;
+    transition: all 0.3s ease-in-out;
+    position: absolute;
+    background-color: rgba(16, 16, 32, 0.95);
+}
+
+/* --- Inventory Tables (e.g., Air Conditioner, FM-200) Styles --- */
+
+/* Parent div of tables, responsible for horizontal scrolling */
+#acInventoryList,
+#fm200List,
+#cameraList,
+#powerComponentsList,
+#accessControlList,
+#upsDetailList,
+#heaterList {
+    overflow-x: auto; /* Enables horizontal scrolling if table content is too wide */
+    -webkit-overflow-scrolling: touch; /* Improves scrolling performance on touch devices */
+    width: 100%; /* Ensure this container always takes full width */
+    scrollbar-width: thin; /* Firefox scrollbar */
+    scrollbar-color: #581c87 #1a1a2e; /* Firefox scrollbar colors */
+}
+
+/* Webkit (Chrome, Safari) scrollbar styling */
+#acInventoryList::-webkit-scrollbar,
+#fm200List::-webkit-scrollbar,
+#cameraList::-webkit-scrollbar,
+#powerComponentsList::-webkit-scrollbar,
+#accessControlList::-webkit-scrollbar,
+#upsDetailList::-webkit-scrollbar,
+#heaterList::-webkit-scrollbar {
+    height: 8px; /* Height for horizontal scrollbar */
+}
+#acInventoryList::-webkit-scrollbar-track,
+#fm200List::-webkit-scrollbar-track,
+#cameraList::-webkit-scrollbar-track,
+#powerComponentsList::-webkit-scrollbar-track,
+#accessControlList::-webkit-scrollbar-track,
+#upsDetailList::-webkit-scrollbar-track,
+#heaterList::-webkit-scrollbar-track {
+    background: #1a1a2e; /* Track background matching card */
+    border-radius: 10px;
+}
+#acInventoryList::-webkit-scrollbar-thumb,
+#fm200List::-webkit-scrollbar-thumb,
+#cameraList::-webkit-scrollbar-thumb,
+#powerComponentsList::-webkit-scrollbar-thumb,
+#accessControlList::-webkit-scrollbar-thumb,
+#upsDetailList::-webkit-scrollbar-thumb,
+#heaterList::-webkit-scrollbar-thumb {
+    background-color: #581c87; /* Thumb color */
+    border-radius: 10px;
+    border: 2px solid #1a1a2e; /* Space around thumb */
+}
+#acInventoryList::-webkit-scrollbar-thumb:hover,
+#fm200List::-webkit-scrollbar-thumb:hover,
+#cameraList::-webkit-scrollbar-thumb:hover,
+#powerComponentsList::-webkit-scrollbar-thumb:hover,
+#accessControlList::-webkit-scrollbar-thumb:hover,
+#upsDetailList::-webkit-scrollbar-thumb:hover,
+#heaterList::-webkit-scrollbar-thumb:hover {
+    background-color: #c084fc; /* Brighter thumb on hover */
+}
+
+
+.ac-inventory-table {
+    width: 100%; /* Table takes full width of its scrollable container */
+    border-collapse: collapse;
+    margin-top: 1rem;
+    background-color: #1a1a2e; /* Card background color */
+    border-radius: 0.5rem;
+    table-layout: auto; /* IMPORTANT: Columns adjust to content */
+}
+
+/* General cell styling (th and td) */
+.ac-inventory-table th,
+.ac-inventory-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #2a2a3e; /* Subtle border between rows */
+    font-size: 0.9rem; /* Slightly larger font size for data cells */
+    color: #f0f0f0; /* Explicitly set text color for cells */
+    vertical-align: top; /* Align content to the top for wrapped text */
+
+    /* Default behavior: allow content to span, don't hide/ellipsis by default */
+    white-space: normal; /* DEFAULT: Allow text to wrap for full visibility */
+    overflow: visible; /* DEFAULT: Don't hide content by default */
+    text-overflow: clip; /* DEFAULT: No ellipsis by default */
+    max-width: none; /* DEFAULT: Allow columns to expand as needed by content */
+    width: auto; /* DEFAULT: Allow columns to size automatically */
+}
+
+/* Header specific styling */
+.ac-inventory-table th {
+    background-color: #2a2a3e;
+    color: #c084fc;
+    font-weight: 600; /* Headers are bolder */
+    text-transform: uppercase;
+    font-size: 0.8rem; /* Keep headers slightly smaller/crisper */
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    vertical-align: middle; /* Vertically align header text */
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    
+    /* Headers often look better if they don't wrap, so force nowrap and ellipsis */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ac-inventory-table tbody tr:hover {
+    background-color: #24243a;
+}
+
+/* --- Specific Column Adjustments for AC Inventory Table --- */
+/* (Based on your screenshot and common table data types) */
+
+/* AC_No (1st column - removed from data in JS but still in headers) */
+/* If you want AC_No visible, you need to add it back to your `airConditioners` mock data */
+/* For now, assuming it's omitted but if present, this targets the column */
+/*
+.ac-inventory-table td:nth-child(1),
+.ac-inventory-table th:nth-child(1) {
+    width: 50px;
+    min-width: 50px;
+    max-width: 60px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+*/
+/* The previous HTML had a column header "A.C NO" but your JS mock data for airConditioners 
+    *starts* with "Label". So "Label" is actually the 1st column being rendered now.
+    Let's adjust column targeting based on your *current data structure*.
+*/
+
+/* Label (Now the 1st visible column in your screenshot) */
+.ac-inventory-table td:nth-child(1),
+.ac-inventory-table th:nth-child(1) {
+    min-width: 250px; /* Give it ample space */
+    max-width: 400px; /* Cap maximum width to prevent excessive expansion on super wide screens */
+    white-space: normal; /* ALLOW TEXT TO WRAP */
+    word-break: break-word; /* Break long words if necessary */
+    /* Remove overflow hidden and text-overflow ellipsis here to guarantee full view,
+        unless you want it to wrap AND then truncate if still too long.
+        Given "full view" request, let's remove truncation for labels. */
+    overflow: visible; /* Ensure content is fully visible, even if it pushes width */
+    text-overflow: clip; /* No ellipsis */
+}
+
+/* Brand (Now the 2nd visible column) */
+.ac-inventory-table td:nth-child(2),
+.ac-inventory-table th:nth-child(2) {
+    min-width: 100px; /* Sufficient space for brand names */
+    max-width: 150px;
+    white-space: nowrap; /* Keep on one line */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Capacity (Now the 3rd visible column) */
+.ac-inventory-table td:nth-child(3),
+.ac-inventory-table th:nth-child(3) {
+    min-width: 80px;
+    max-width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Location (Now the 4th visible column) */
+.ac-inventory-table td:nth-child(4),
+.ac-inventory-table th:nth-child(4) {
+    min-width: 100px;
+    max-width: 180px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Room Label (Now the 5th visible column) - Allow wrapping, generous space */
+.ac-inventory-table td:nth-child(5),
+.ac-inventory-table th:nth-child(5) {
+    min-width: 180px;
+    max-width: 300px;
+    white-space: normal; /* ALLOW TEXT TO WRAP */
+    word-break: break-word;
+    overflow: visible; /* Ensure full view */
+    text-overflow: clip; /* No ellipsis */
+}
+
+/* State / Status (Now the 6th visible column) - fixed pill shape, nowrap */
+.ac-inventory-table td:nth-child(6),
+.ac-inventory-table th:nth-child(6) {
+    width: 100px; /* Fixed width for consistency */
+    min-width: 90px;
+    max-width: 120px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Floor (Now the 7th visible column) - small, nowrap */
+.ac-inventory-table td:nth-child(7),
+.ac-inventory-table th:nth-child(7) {
+    width: 50px;
+    min-width: 50px;
+    max-width: 60px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Remark (Now the 8th visible column, and last) - always allow wrapping, generous width */
+/* Using last-child is robust if Remark is always the last column */
+.ac-inventory-table td:last-child,
+.ac-inventory-table th:last-child {
+    min-width: 250px;
+    max-width: 400px; /* Cap, but generous */
+    white-space: normal; /* ALLOW TEXT TO WRAP */
+    word-break: break-word;
+    overflow: visible; /* Ensure full view */
+    text-overflow: clip; /* No ellipsis */
+}
+
+
+/* Status cell styling for colors */
+.ac-inventory-status {
+    padding: 0.25rem 0.6rem;
+    border-radius: 9999px;
+    font-weight: 500;
+    font-size: 0.75rem;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.ac-inventory-status.Working, .ac-inventory-status.Normal, .ac-inventory-status.Secured, .ac-inventory-status.Online, .ac-inventory-status.Good {
+    background-color: rgba(34, 197, 94, 0.2);
+    color: #22c55e;
+}
+.ac-inventory-status.Fault, .ac-inventory-status.Warning, .ac-inventory-status.Degrading, .ac-inventory-status.Low-pressure, .ac-inventory-status.High-load {
+    background-color: rgba(234, 179, 8, 0.2);
+    color: #eab308;
+}
+.ac-inventory-status.Power-off, .ac-inventory-status.Critical, .ac-inventory-status.Offline, .ac-inventory-status.Malfunction {
+    background-color: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+}
+
+/* --- Customization Mode Styles (Sortable.js) --- */
+.sortable-chosen {
+    opacity: 0.7;
+    background-color: rgba(128, 0, 128, 0.4);
+    cursor: grabbing !important;
+    transform: scale(1.02);
+    transition: none;
+}
+.sortable-ghost {
+    opacity: 0.2;
+    background-color: rgba(150, 0, 150, 0.2);
+    border: 2px dashed rgba(192, 132, 252, 0.5);
+    box-shadow: none;
+}
+.sortable-drag {
+    cursor: grabbing !important;
+}
+.customization-active .dashboard-card {
+    border: 1px dashed rgba(192, 132, 252, 0.5);
+    cursor: grab;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4),
+                0 0 30px rgba(128, 0, 128, 0.3),
+                inset 0 0 8px rgba(128, 0, 128, 0.15);
+}
+.customization-active .dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(128, 0, 128, 0.4),
+                inset 0 0 10px rgba(128, 0, 128, 0.2);
+}
+
+/* Utility class for grid items (Tailwind equivalent) */
+.col-span-1 { grid-column: span 1 / span 1; }
+.lg\:col-span-2 {
+    grid-column: span 1 / span 1;
+}
+@media (min-width: 1024px) {
+    .lg\:col-span-2 {
+        grid-column: span 2 / span 2;
+    }
+}
+
+/* Tooltip for SVG elements */
+#svgTooltip {
+    position: absolute;
+    background-color: rgba(30, 30, 45, 0.95);
+    border: 1px solid #800080;
+    color: #e0e0e0;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    z-index: 20;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Modal styles (Add Element Modal) */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+}
+.modal-content {
+    background-color: #1a1a2e;
+    margin: auto;
+    padding: 2rem;
+    border: 1px solid #800080;
+    border-radius: 0.75rem;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 0 40px rgba(128, 0, 128, 0.4);
+    color: #e0e0e0;
+}
+.modal-content input, .modal-content select {
+    background-color: #0d0d1a;
+    border: 1px solid #581c87;
+    color: #e0e0e0;
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+.modal-content button {
+    margin-top: 1rem;
+}
+
+/* Custom Message Box styles (replaces native alert/confirm) */
+#customMessageBox {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0,0,0,0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+#customMessageBox > div {
+    background-color: #1a1a2e;
+    padding: 2rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 0 40px rgba(128, 0, 128, 0.4);
+    border: 1px solid #800080;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+}
+#customMessageBox h3 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+#customMessageBox p {
+    color: #e0e0e0;
+    margin-bottom: 1.5rem;
+}
+#customMessageBox button {
+    margin: 0 0.5rem;
+}
+
+/* Media query for larger screens for main body layout (flex-row) */
+@media (min-width: 1024px) {
+    body { /* Corrected from body.flex-col to simply body to target the main layout change */
+        flex-direction: row;
+    }
+}
